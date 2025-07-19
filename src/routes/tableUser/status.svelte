@@ -5,7 +5,8 @@
     #status{
         width: 1vh;
         height: 1vh;
-        background-color: green;
+        background-color: var(--statusColor);
+        grid-column: var(--grid-column);
         border-radius: 50%;
         justify-self: start;
         align-self: center;

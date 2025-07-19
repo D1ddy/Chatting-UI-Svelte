@@ -1,5 +1,5 @@
 <script lang="ts">
-
+    import Friend from './friend.svelte';
 </script>
 <style>
     div{
@@ -12,5 +12,7 @@
     }
 </style>
 <div>
-    
+    <Friend user = {{username: "Mitic", status : "green", icon: "#7a3bcc"}}/>
+    <Friend user = {{username: "Biro", status : "#cc3b4a" , icon: "#cccc3b"}} />
+    <Friend user = {{username : "Kure", status : "#cccc3b", icon:"purple"}} />
 </div>

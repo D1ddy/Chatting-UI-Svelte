@@ -33,7 +33,7 @@
     <UserIcon --grid-column = 2  --color = '{changeIcon}'/>   
     <div id = "usernameStatusDiv">
         <Username />
-        <Status />
+        <Status --statusColor = "green"/>
     </div>
     <Settings />
 </div>
