@@ -2,11 +2,16 @@
     let settings:boolean = $state(false);
     import UserIcon from "./userIcon.svelte";
 	import { username } from '../userStore';
+    import { icon } from '../userStore';
     let colors:Array<string> = ['#3b62cc','#7a3bcc','#cccc3b','#cc3b4a'];
     let inputValue:any = $state();
     let name:string = $state('');
+    let changeIcon:string = $state('');
     username.subscribe((value) => {
         name = value;
+    })
+    icon.subscribe((value) => {
+        changeIcon = value;
     })
 </script>
 <style>
@@ -79,6 +84,9 @@
         font-size: 2vh;
         font-family: "Gelasio", serif;
     }
+    .iconDivs{
+        cursor: pointer;
+    }
 </style>
 <div id = "settingsGear">
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -98,16 +106,24 @@
 {#if settings}
     <div id="settings">
             <div id="settingsTag"> Settings </div>
-            <input type="text" id="changeUsername" placeholder="Change Username" bind:this={inputValue} >
+            <input type="text" id="changeUsername" placeholder="Change Username" bind:this={inputValue} maxlength="17" >
             <div id = "chooseIcon">
+            <!-- svelte-ignore a11y_no_static_element_interactions -->
             {#each colors as color}
                 <!-- svelte-ignore attribute_quoted -->
-                <UserIcon  --color = '{color}' />
+                 <!-- svelte-ignore a11y_click_events_have_key_events -->
+                 <div class="iconDivs" onclick="{() => {
+                    icon.update(changeIcon => color);
+                 }}">
+                     <UserIcon  --color = '{color}' />
+                 </div>
             {/each}
             </div>
             <div id = "buttonsContainer">
                 <button class="buttons" onclick="{() => {
-                    username.update(name => inputValue.value);
+                    if(!(inputValue.value.length < 1)){
+                        username.update(name => inputValue.value);
+                    }
                     settings = false;
                 }}"> Confirm </button>
                 <button class = "buttons" onclick='{() =>{

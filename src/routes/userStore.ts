@@ -4,3 +4,7 @@ export const username:Writable<string> = writable('',(set,update)=>{
     //console.log("Got a subcriber");
     return () => console.log('No more subscribers');
 });
+export const icon:Writable<string> = writable('', (set) => {
+    set('#3b62cc');
+    return () => console.log('No more subcribers');
+});

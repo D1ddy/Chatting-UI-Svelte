@@ -2,8 +2,12 @@
     import Settings from './userSettings.svelte';
     import UserIcon from './userIcon.svelte';
 	import Status from './status.svelte';
-	import Username from './username.svelte';
-    
+	import Username from './username.svelte'
+    import { icon } from '../userStore';
+    let changeIcon:string = $state('');
+    icon.subscribe((value) => {
+        changeIcon = value;
+    })
 </script>
 <style>
      @import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400..700;1,400..700&family=Iceland&family=Orbitron:wght@700&family=VT323&display=swap');
@@ -16,6 +20,7 @@
     #usernameStatusDiv{
         display: grid;
         grid-template-columns: 1fr 1vh 1fr;
+        gap: 1vh;
         grid-column: var(--grid-column);
         grid-row: var(--grid-row);
         width: 100%;
@@ -24,7 +29,8 @@
     }
 </style>
 <div id = 'userDiv'>
-    <UserIcon --grid-column = 2  --color = '#3b62cc'/>   
+    <!-- svelte-ignore attribute_quoted -->
+    <UserIcon --grid-column = 2  --color = '{changeIcon}'/>   
     <div id = "usernameStatusDiv">
         <Username />
         <Status />
